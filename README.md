@@ -8,7 +8,9 @@ Welcome to **dokumantos** – your go-to solution for managing personalized docu
 
 Build with Vite,NextUI,Tailwind, Express MongoDB, and other tools.
 
-This Project also contains advanced example of CRUD operations for dynamically created content. (See [Categories.jsx](https://github.com/ahgsql/dokumantos/blob/main/front/src/pages/Categories.jsx) )
+This Project also contains advanced example of CRUD operations for dynamically created content.
+
+(See [Categories.jsx](https://github.com/ahgsql/dokumantos/blob/main/front/src/pages/Categories.jsx) )
 
 ### Project Structure
 
