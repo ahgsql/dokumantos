@@ -56,7 +56,13 @@ export default function Category() {
                                 alt="nextui logo"
                                 height={40}
                                 radius="sm"
-                                src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                                src={
+                                  page.pageIcon == ""
+                                    ? "https://picsum.photos/200"
+                                    : import.meta.env.VITE_BASE_URL +
+                                      "/" +
+                                      page.pageIcon
+                                }
                                 width={40}
                               />
                               <div className="flex flex-col">

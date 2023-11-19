@@ -10,6 +10,10 @@ const categorySchema = new Schema(
     slug: {
       type: String,
     },
+    catImage: {
+      type: String,
+      default: "",
+    },
   },
   { collection: "categories" }
 );

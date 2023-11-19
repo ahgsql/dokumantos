@@ -1,7 +1,10 @@
 import { Router } from "express";
 
+import Jimp from "jimp";
 import Category from "../models/Category.js";
 import Page from "../models/Page.js";
+import { textToImage } from "../utils/sdxl.js";
+import translate from "../utils/translate.js";
 const router = Router();
 
 router.get("/:slug", async (req, res) => {
@@ -28,6 +31,28 @@ router.post("/", async (req, res) => {
 
     let newPage = await new Page({ ...req.body }).save();
     res.status(200).json({ success: true, data: newPage });
+    console.log(req.body.title);
+    let ceviri = await translate(req.body.title, "tr_TR", "en_GB");
+    let prompt =
+      "Stunning desktop Icon line art,   " +
+      ceviri.result +
+      ", digital art, illustrative, sketchy, Web Icon, line art";
+
+    let image = await textToImage(
+      prompt,
+      "photo, photorealistic, realism, ugly"
+    );
+    let imageName = image.split(".")[0];
+    Jimp.read("public/" + image, (err, img) => {
+      if (err) throw err;
+      img
+        .resize(200, 200) // resize
+        .quality(60) // set JPEG quality
+        .write("public/" + imageName + "_200.webp"); // save
+    });
+
+    newPage.pageIcon = imageName + "_200.webp";
+    await newPage.save();
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: true, message: "Internal Server Error" });

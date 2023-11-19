@@ -10,10 +10,12 @@ import {
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { Editable, useEditor } from "@wysimark/react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import getPage from "../hooks/getPage";
+import removePage from "../hooks/removePage";
 import { updatePage } from "../hooks/updatePage";
 export default function Category() {
   const [page, setPage] = useState(null);
@@ -29,17 +31,23 @@ export default function Category() {
   });
   const [markdown, setMarkdown] = useState("");
   const [stateTracker, setStateTracker] = useState(0);
+  const navigate = useNavigate();
   useEffect(() => {
     (async () => {
-      let page = await getPage(params.slug);
-      setPage(page.data);
-      setMarkdown(page.content);
-      setCatInfo(page.categoryInfo);
+      setIsLoading(true);
+
+      let page2 = await getPage(params.slug);
+      setPage(page2.data);
+      setCatInfo(page2.categoryInfo);
       setIsLoading(false);
+      setMarkdown(page2.data.content);
     })();
   }, [stateTracker]);
 
-  const pageRemove = () => {};
+  const pageRemove = async () => {
+    await removePage(page._id);
+    navigate("/category/" + catInfo.slug);
+  };
   const pageUpdate = async () => {
     const data = {
       title: page.title,
@@ -47,19 +55,14 @@ export default function Category() {
     };
     await updatePage(page._id, data);
     setStateTracker(stateTracker + 1);
+    toast.success("Page Güncellendi");
   };
   return (
     <div>
       <ToastContainer />
       <div className="flex flex-row	gap-10 mt-10 space-between justify-center w-screen  ">
         <div className="flex flex-col  w-5/6 ">
-          <Tabs
-            aria-label="Options"
-            color="primary"
-            onSelectionChange={() => {
-              if (!isLoading) setMarkdown(page.content);
-            }}
-          >
+          <Tabs aria-label="Options" color="primary">
             <Tab key="icerik" title="İçerik" className="w-5/6">
               <Card className="w-full">
                 {isLoading ? (

@@ -19,11 +19,13 @@ const pageSchema = new Schema(
     clickCount: {
       type: Number,
       default: 0,
-    }
+    },
+    pageIcon: {
+      type: String,
+      default: "",
+    },
   },
-  { collection: "pages",
-  timestamps:true },
-  
+  { collection: "pages", timestamps: true }
 );
 
 const pageModel = mongoose.model("page", pageSchema);

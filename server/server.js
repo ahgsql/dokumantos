@@ -1,9 +1,9 @@
+import cookieparser from "cookie-parser";
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-const app = express();
-import cors from "cors";
-import cookieparser from "cookie-parser";
 import connect from "./db.js";
+const app = express();
 
 import Category from "./routes/category.js";
 import Page from "./routes/page.js";
@@ -14,6 +14,7 @@ connect();
 // Middlewares
 app.use(express.json());
 app.use(cookieparser());
+app.use(express.static("public"));
 app.use(
   cors({
     credentials: true,

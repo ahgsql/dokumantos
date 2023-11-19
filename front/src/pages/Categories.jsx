@@ -1,29 +1,29 @@
-import { useEffect, useState, useRef } from "react";
-import { CheckIcon } from "../components/icons/CheckIcon";
-import { DeleteIcon } from "../components/icons/DeleteIcon";
-import { AddIcon } from "../components/icons/AddIcon";
 import {
   Button,
-  Input,
-  Spinner,
-  Tabs,
-  Tab,
   Card,
   CardBody,
   CardHeader,
   Image,
+  Input,
   Link,
   Skeleton,
+  Spinner,
+  Tab,
+  Tabs,
 } from "@nextui-org/react";
-import urlSlug from "url-slug";
-import { ToastContainer, toast } from "react-toastify";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import urlSlug from "url-slug";
+import { AddIcon } from "../components/icons/AddIcon";
+import { CheckIcon } from "../components/icons/CheckIcon";
+import { DeleteIcon } from "../components/icons/DeleteIcon";
 import getCategories from "../hooks/getCategories";
 
 import { addCategory } from "../hooks/addCategory";
-import { updateCategory } from "../hooks/updateCategory";
 import { removeCategory } from "../hooks/removeCategory";
+import { updateCategory } from "../hooks/updateCategory";
 export default function Categories() {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
@@ -42,6 +42,10 @@ export default function Categories() {
         id: category._id,
         title: category.categoryname,
         slug: category.slug,
+        image:
+          category.catImage == ""
+            ? "https://picsum.photos/200"
+            : import.meta.env.VITE_BASE_URL + "/" + category.catImage,
       };
     });
     setCategories(arr);
@@ -62,6 +66,9 @@ export default function Categories() {
       setIsLoading(false);
     }
   };
+  setTimeout(() => {
+    console.log(nameRefs.current);
+  }, 2500);
   const update = async (id) => {
     let data = {
       categoryname: nameRefs.current[id].value,
@@ -135,7 +142,7 @@ export default function Categories() {
                                   removeWrapper
                                   alt="Card background"
                                   className="z-0 w-full h-full object-cover"
-                                  src="https://picsum.photos/200"
+                                  src={category.image}
                                 />
                               </Link>
                             </Card>
