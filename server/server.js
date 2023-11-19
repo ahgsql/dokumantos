@@ -5,9 +5,13 @@ import express from "express";
 import connect from "./db.js";
 const app = express();
 
+import fs from "fs";
 import Category from "./routes/category.js";
 import Page from "./routes/page.js";
 
+if (!fs.existsSync("./public/generatedimages")) {
+  fs.mkdirSync("./public/generatedimages", { recursive: true });
+}
 dotenv.config();
 connect();
 

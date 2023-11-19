@@ -1,15 +1,13 @@
-import axios from "axios";
-
-import React from "react";
 import {
+  Button,
+  Input,
+  Link,
   Navbar,
   NavbarBrand,
   NavbarContent,
-  Input,
-  Link,
   NavbarItem,
-  Button,
 } from "@nextui-org/react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { AddIcon } from "../components/icons/AddIcon";
 export default function Nav() {
