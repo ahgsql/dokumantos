@@ -1,15 +1,13 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router-dom";
 import { Editable, useEditor } from "@wysimark/react";
+import React, { useEffect, useState } from "react";
 
-import { Button, Tooltip, SelectItem, Select, Input } from "@nextui-org/react";
+import { Input, Select, SelectItem } from "@nextui-org/react";
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import getCategories from "../hooks/getCategories";
 import { addPage } from "../hooks/addPage";
+import getCategories from "../hooks/getCategories";
 export default function AddPage() {
   const [markdown, setMarkdown] = useState("# Hello World");
 
@@ -42,9 +40,7 @@ export default function AddPage() {
     authToken:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllwWkdmN2pJYTRQVEZVV2oifQ.eyJpYXQiOjE3MDAyNjE4MDIsImV4cCI6MTczMTgxOTQwMn0.fgQWGLOJ05LRGiIY_3pLhJMY1tCn7U6p5-HkPJmIaj0",
   });
-  const showMarkdown = () => {
-    alert(editor.getMarkdown());
-  };
+
   return (
     <div>
       <ToastContainer />

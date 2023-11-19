@@ -1,29 +1,21 @@
-import React, { useEffect, useState, useCallback } from "react";
-import getCategoryPages from "../hooks/getCategoryPages";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useLocation, useParams } from "react-router-dom";
 import {
-  Button,
-  Tooltip,
-  SelectItem,
-  Select,
-  Input,
-  Spinner,
-  Tabs,
-  Tab,
   Card,
   CardBody,
   CardHeader,
+  Divider,
   Image,
   Link,
-  Divider,
-  CardFooter,
+  Spinner,
 } from "@nextui-org/react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import getCategoryPages from "../hooks/getCategoryPages";
 export default function Category() {
   const [pages, setPages] = useState([]);
   const [categ, setCateg] = useState(null);
-  let location = useLocation();
+
   let params = useParams();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {

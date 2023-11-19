@@ -1,5 +1,6 @@
 import { Router } from "express";
 
+import Category from "../models/Category.js";
 import Page from "../models/Page.js";
 const router = Router();
 
@@ -10,22 +11,22 @@ router.get("/:slug", async (req, res) => {
       { $inc: { clickCount: 1 } }, // clickCount'u 1 artır
       { new: true } // Güncellenmiş dökümanı döndür
     );
-
-    res.json({ success: true, data: page });
+    const catinfo = await Category.findById(page.categoryId);
+    res.json({ success: true, data: page, categoryInfo: catinfo });
   } catch (error) {
     res.status(400).json({ error: error.message });
-  } 
+  }
 });
 router.post("/", async (req, res) => {
   try {
-  const page = await Page.findOne({ slug: req.body.slug });
-  if (page)
-    return res.status(400).json({
-      error: true,
-      message: "Same Slug Page already exists",
-    });
+    const page = await Page.findOne({ slug: req.body.slug });
+    if (page)
+      return res.status(400).json({
+        error: true,
+        message: "Same Slug Page already exists",
+      });
 
-    let newPage=await new Page({ ...req.body }).save();
+    let newPage = await new Page({ ...req.body }).save();
     res.status(200).json({ success: true, data: newPage });
   } catch (err) {
     console.log(err);
@@ -64,6 +65,5 @@ router.put("/:id", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
 
 export default router;
