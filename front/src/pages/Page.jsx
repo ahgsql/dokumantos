@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader, Spinner } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Skeleton } from "@nextui-org/react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -27,20 +27,34 @@ export default function Category() {
         <div className="flex flex-col  w-5/6 ">
           <Card className="w-full">
             {isLoading ? (
-              <div className="columns-5 justify-center flex mt-10 w-full">
-                <Spinner size="lg" />
+              <div className=" w-full flex flex-col items-baseline gap-3 p-10">
+                <div>
+                  <h1>
+                    <Skeleton className="flex  w-32 h-7 mb-10" />
+                  </h1>
+                </div>
+                <div className="w-full flex flex-col gap-2">
+                  <Skeleton className="h-9 w-3/5 rounded-lg" />
+                  <Skeleton className="h-9 w-4/5 rounded-lg" />
+                  <Skeleton className="h-9 w-2/5 rounded-lg" />
+                  <Skeleton className="h-9 w-4/5 rounded-lg" />
+                  <Skeleton className="h-9 w-4/5 rounded-lg" />
+                  <Skeleton className="h-9 w-4/5 rounded-lg" />
+                  <Skeleton className="h-9 w-3/5 rounded-lg" />
+                  <Skeleton className="h-9 w-4/5 rounded-lg" />
+                </div>
               </div>
             ) : (
-              <>
+              <div className="p-10">
                 <CardHeader>
-                  <h1 className="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">
-                    TEST
+                  <h1 className=" text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">
+                    {page.title}
                   </h1>
                 </CardHeader>
                 <CardBody className="w-full">
                   <MarkdownPreview source={page.content} className="" />
                 </CardBody>
-              </>
+              </div>
             )}
           </Card>
         </div>
