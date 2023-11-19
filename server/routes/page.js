@@ -34,9 +34,9 @@ router.post("/", async (req, res) => {
     console.log(req.body.title);
     let ceviri = await translate(req.body.title, "tr_TR", "en_GB");
     let prompt =
-      "Stunning desktop Icon line art,   " +
+      "Stunning desktop Icon ,   " +
       ceviri.result +
-      ", digital art, illustrative, sketchy, Web Icon, line art";
+      ", digital art, illustrative, sketchy, Web Icon, flat bg";
 
     let image = await textToImage(
       prompt,

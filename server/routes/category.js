@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
       .json({ message: "Category added.", success: true, data: newCategory });
     let ceviri = await translate(req.body.categoryname, "tr_TR", "en_GB");
     let prompt =
-      "Stunning cover art for tech themed - flat pastel colors,  " +
+      "Stunning cover art for   " +
       ceviri.result +
       ", digital art, illustrative, sketchy, highly detailed";
 
