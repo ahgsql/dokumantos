@@ -15,6 +15,12 @@ The repository consists of two main folders:
 
 ## Frontend (front)
 
+### Tech Stack
+
+- **Framework:** React
+- **Bundler:** Vite
+- **CSS Framework:** Tailwind CSS
+
 ### Getting Started
 
 To run the frontend project:
@@ -45,6 +51,11 @@ To run the frontend project:
 The frontend server will start on port 4000 by default.
 
 ## Backend (server)
+
+### Tech Stack
+
+- **Framework:** Express
+- **Database:** MongoDB with Mongoose
 
 ### Getting Started
 

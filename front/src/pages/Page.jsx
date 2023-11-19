@@ -18,7 +18,7 @@ export default function Category() {
       console.log(page.data);
       setIsLoading(false);
     })();
-  }, []);
+  });
 
   return (
     <div>
