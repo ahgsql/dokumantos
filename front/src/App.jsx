@@ -1,25 +1,25 @@
-import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Category from "./pages/Category";
-import Categories from "./pages/Categories";
+import LangProvider from "./context/LangProvider";
 import AddPage from "./pages/AddPage";
+import Categories from "./pages/Categories";
+import Category from "./pages/Category";
+import Home from "./pages/Home";
 import Page from "./pages/Page";
 
 function App() {
-  const navigate = useNavigate();
-
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/category/:slug" element={<Category />}></Route>
-        <Route path="/categories" element={<Categories />}></Route>
-        <Route path="/add" element={<AddPage />}></Route>
-        <Route path="/page/:slug" element={<Page />}></Route>
-      </Routes>
+      <LangProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/category/:slug" element={<Category />}></Route>
+          <Route path="/categories" element={<Categories />}></Route>
+          <Route path="/add" element={<AddPage />}></Route>
+          <Route path="/page/:slug" element={<Page />}></Route>
+        </Routes>
+      </LangProvider>
     </>
   );
 }

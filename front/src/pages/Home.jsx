@@ -1,15 +1,14 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React from "react";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Snippet } from "@nextui-org/react";
 import Markdown from "react-markdown";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { LangContext } from "../context/LangProvider";
 export default function Home() {
+  const { getT } = React.useContext(LangContext);
+
   const markdown =
     '# Hi, *Pluto*! ```javascript function test() {   console.log("This code will have a copy button to the right of it"); } ``` ';
-
-  const notify = () => toast("Wow so easy!");
 
   return (
     <div>

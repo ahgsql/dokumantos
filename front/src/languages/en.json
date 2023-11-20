@@ -1,0 +1,17 @@
+{
+    "data":{
+        "name":"English",
+        "name_in_own_language":"English",
+        "code":"en"
+    },
+    "translations":{
+        "Categories":"Categories",
+        "Pages":"Pages",
+        "New Page":"New Page",
+        "Search":"Search",
+        "Content":"Content",
+        "Edit":"Edit",
+        "Select Language":"Select Language"
+    }
+    
+}

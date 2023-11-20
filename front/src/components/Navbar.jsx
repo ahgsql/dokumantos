@@ -6,11 +6,17 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  Select,
+  SelectItem,
 } from "@nextui-org/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { AddIcon } from "../components/icons/AddIcon";
+import { LangContext } from "../context/LangProvider";
+
 export default function Nav() {
+  const { t, langs, setLang, lang } = React.useContext(LangContext);
+
   const [value, setValue] = React.useState("");
   const location = useLocation();
   let currentpath = location.pathname.slice(1, 500);
@@ -27,7 +33,7 @@ export default function Nav() {
             color={currentpath == "categories" ? "primary" : "foreground"}
             href="/categories"
           >
-            Kategoriler
+            {t("Categories")}
           </Link>
         </NavbarItem>
         <NavbarItem isActive={currentpath == "pages"}>
@@ -35,28 +41,46 @@ export default function Nav() {
             href="/pages"
             color={currentpath == "pages" ? "primary" : "foreground"}
           >
-            Sayfalar
+            {t("Pages")}
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify="end">
+      <NavbarContent>
         <NavbarItem>
           <Link href="/add">
             <Button color="danger">
-              Yeni Sayfa
+              {t("New Page")}
               <AddIcon />
             </Button>
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Input
-            label="Search"
+            label={t("Search")}
             value={value}
             onValueChange={setValue}
             labelPlacement="outside-left"
           />
         </NavbarItem>
-        <p className="text-default-500 text-small">Input value: {value}</p>
+      </NavbarContent>
+      <NavbarContent className="w-full">
+        <Select
+          label={t("Select Language")}
+          className="max-w-xs"
+          onChange={(event) => {
+            setLang(event.target.value);
+          }}
+          defaultSelectedKeys={[lang]}
+        >
+          {Object.keys(langs).map((langKey, index) => {
+            let lang = langs[langKey];
+            return (
+              <SelectItem key={lang.data.code} value={lang.data.code}>
+                {lang.data.name_in_own_language}
+              </SelectItem>
+            );
+          })}
+        </Select>
       </NavbarContent>
     </Navbar>
   );

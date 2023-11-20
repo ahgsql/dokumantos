@@ -1,0 +1,16 @@
+{
+    "data":{
+        "name":"Turkish",
+        "name_in_own_language":"Türkçe",
+        "code":"tr"
+    },
+    "translations":{
+        "Categories":"Kategoriler",
+        "Pages":"Sayfalar",
+        "New Page":"Yeni sayfa",
+        "Search":"Ara",
+        "Content":"İçerik",
+        "Edit":"Düzenle",
+        "Select Language":"Dil Seçiniz"
+    }
+}
