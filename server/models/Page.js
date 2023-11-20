@@ -21,8 +21,12 @@ const pageSchema = new Schema(
       default: 0,
     },
     pageIcon: {
-      type: String,
-      default: "",
+      type: Schema.Types.Mixed,
+      default: {
+        full: "",
+        thumb: "",
+        medium: "",
+      },
     },
   },
   { collection: "pages", timestamps: true }

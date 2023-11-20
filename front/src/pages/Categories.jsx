@@ -43,9 +43,9 @@ export default function Categories() {
         title: category.categoryname,
         slug: category.slug,
         image:
-          category.catImage == ""
+          category.catImage.medium == ""
             ? "https://picsum.photos/200"
-            : import.meta.env.VITE_BASE_URL + "/" + category.catImage,
+            : category.catImage.medium,
       };
     });
     setCategories(arr);
@@ -131,8 +131,8 @@ export default function Categories() {
                               }}
                             >
                               <Link href={"/category/" + category.slug}>
-                                <CardHeader className="absolute z-10 top-1 flex-col !items-start">
-                                  <h4 className="text-white font-medium text-large drop-shadow">
+                                <CardHeader className="absolute z-10 bottom-1 flex-col !items-center 	 justify-items-center	">
+                                  <h4 className="text-gray-100 leading-5 font-medium text-large rounded-lg	 drop-shadow backdrop-blur	p-2  ">
                                     {category.title}
                                   </h4>
                                 </CardHeader>

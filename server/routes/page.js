@@ -42,16 +42,8 @@ router.post("/", async (req, res) => {
       prompt,
       "photo, photorealistic, realism, ugly"
     );
-    let imageName = image.split(".")[0];
-    Jimp.read("public/" + image, (err, img) => {
-      if (err) throw err;
-      img
-        .resize(200, 200) // resize
-        .quality(60) // set JPEG quality
-        .write("public/" + imageName + "_200.webp"); // save
-    });
 
-    newPage.pageIcon = imageName + "_200.webp";
+    newPage.pageIcon = image;
     await newPage.save();
   } catch (err) {
     console.log(err);

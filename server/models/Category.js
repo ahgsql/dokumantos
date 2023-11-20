@@ -11,8 +11,12 @@ const categorySchema = new Schema(
       type: String,
     },
     catImage: {
-      type: String,
-      default: "",
+      type: Schema.Types.Mixed,
+      default: {
+        full: "",
+        thumb: "",
+        medium: "",
+      },
     },
   },
   { collection: "categories" }

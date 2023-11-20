@@ -45,26 +45,20 @@ router.post("/", async (req, res) => {
       .status(200)
       .json({ message: "Category added.", success: true, data: newCategory });
     let ceviri = await translate(req.body.categoryname, "tr_TR", "en_GB");
+    console.log(ceviri);
     let prompt =
-      "Stunning cover art for   " +
+      "Flat 2D Art of  1  " +
       ceviri.result +
-      ", digital art, illustrative, sketchy, highly detailed";
+      "  dynamic graphic art, simple pastel colors, low saturated, " +
+      ceviri.result +
+      " is in the center of image, big, zoomed";
 
     let image = await textToImage(
       prompt,
-      "photo, photorealistic, realism, ugly"
+      "ugly, deformed, noisy, blurry, drab, boring, moody"
     );
     newCategory.catImage = image;
     await newCategory.save();
-    let imageName = image.split(".")[0];
-
-    Jimp.read("public/" + image, (err, img) => {
-      if (err) throw err;
-      img
-        .resize(500, 500) // resize
-        .quality(60) // set JPEG quality
-        .write("public/" + imageName + "_500.webp"); // save
-    });
   } catch (error) {
     console.log(error);
     res.status(400).json({ error: error.message });
