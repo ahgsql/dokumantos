@@ -20,6 +20,10 @@ const pageSchema = new Schema(
       type: Number,
       default: 0,
     },
+    favourited: {
+      type: Boolean,
+      default: false,
+    },
     pageIcon: {
       type: Schema.Types.Mixed,
       default: {

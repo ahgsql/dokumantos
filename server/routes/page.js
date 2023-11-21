@@ -6,7 +6,22 @@ import Page from "../models/Page.js";
 import { textToImage } from "../utils/sdxl.js";
 import translate from "../utils/translate.js";
 const router = Router();
-
+router.get("/mostClicked", async (req, res) => {
+  try {
+    const pages = await Page.find().sort({ clickCount: -1 }).limit(10);
+    res.json({ success: true, data: pages });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+router.get("/favourites", async (req, res) => {
+  try {
+    const favourites = await Page.find({ favourited: true });
+    res.json({ success: true, data: favourites });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 router.get("/:slug", async (req, res) => {
   try {
     const page = await Page.findOneAndUpdate(
@@ -20,6 +35,7 @@ router.get("/:slug", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
 router.post("/", async (req, res) => {
   try {
     const page = await Page.findOne({ slug: req.body.slug });

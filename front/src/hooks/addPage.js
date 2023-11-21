@@ -41,7 +41,7 @@ export async function addPage({
       import.meta.env.VITE_BASE_URL + "/page",
       body
     );
-    console.log(result.data);
+
     return result.data; // Eğer server'dan bir yanıt bekliyorsanız, burada uygun bir değeri döndürebilirsiniz.
   } catch (error) {
     console.error("Bir hata oluştu:", error);

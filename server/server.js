@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import express from "express";
 import connect from "./db.js";
 const app = express();
-
+//express cache ekle
 import fs from "fs";
 import Category from "./routes/category.js";
 import Page from "./routes/page.js";

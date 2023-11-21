@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Input, Select, SelectItem } from "@nextui-org/react";
 
 import { ToastContainer } from "react-toastify";
-
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { addPage } from "../hooks/addPage";
 import getCategories from "../hooks/getCategories";
@@ -17,6 +17,7 @@ export default function AddPage() {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState(false);
   const [category, setCategory] = React.useState(new Set([]));
+  const navigate = useNavigate();
   useEffect(() => {
     (async () => {
       let allCategories = await getCategories();
@@ -34,7 +35,9 @@ export default function AddPage() {
       category: category.currentKey,
       newCategory,
     };
-    await addPage(data);
+    let result = await addPage(data);
+    navigate("/page/" + result.data.slug);
+    console.log(result);
   };
   const editor = useEditor({
     minHeight: 600,
