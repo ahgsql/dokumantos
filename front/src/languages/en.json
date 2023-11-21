@@ -11,7 +11,13 @@
         "Search":"Search",
         "Content":"Content",
         "Edit":"Edit",
-        "Select Language":"Select Language"
+        "Select Language":"Select Language",
+           "Title":"Title",
+        "Category":"Category",
+        "Category Description":"Select a Category or Create New One",
+        "Documentation":"Documentation",
+        "Select Category":"Select Category",
+        "Save":"Save"
     }
     
 }

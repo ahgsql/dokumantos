@@ -11,6 +11,12 @@
         "Search":"Ara",
         "Content":"İçerik",
         "Edit":"Düzenle",
-        "Select Language":"Dil Seçiniz"
+        "Select Language":"Dil Seçiniz",
+        "Title":"Başlık",
+        "Category":"Kategori",
+        "Category Description":"Varolan Kategorilerden Seçin Veya Ekleyin",
+        "Documentation":"Dokumentasyon",
+        "Select Category":"Kategori Seçimi",
+        "Save":"Kaydet"
     }
 }

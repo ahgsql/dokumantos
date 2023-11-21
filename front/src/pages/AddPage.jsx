@@ -8,9 +8,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { addPage } from "../hooks/addPage";
 import getCategories from "../hooks/getCategories";
+import { LangContext } from "../context/LangProvider";
+
 export default function AddPage() {
   const [markdown, setMarkdown] = useState("# Hello World");
-
+  const { t } = React.useContext(LangContext);
   const [title, setTitle] = useState("");
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState(false);
@@ -49,7 +51,7 @@ export default function AddPage() {
           <div className="space-y-12 ">
             <div className="border-b border-gray-900/10 pb-12">
               <h2 className="text-base font-semibold leading-7 text-gray-900">
-                Başlık
+                {t("Title")}
               </h2>
               <Input
                 key={"primary"}
@@ -62,12 +64,11 @@ export default function AddPage() {
                 }}
               />
               <h2 className="mt-6 text-base font-semibold leading-7 text-gray-900">
-                Kategori // üst sağa al
+                {t("Category")} / üst sağa al
               </h2>
               <p className="mt-1 text-sm leading-6 text-gray-600">
-                Varolan Kategorilerden Seçin Veya Ekleyin //yeni text yazılırsa,
-                selecti YENİ Yap. Selectten yeni harici seçilirse texti boşalt
-                modu değiş
+                {t("Category Description")} /yeni text yazılırsa, selecti YENİ
+                Yap. Selectten yeni harici seçilirse texti boşalt modu değiş
               </p>
               <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div className="w-full flex flex-row flex-wrap gap-4">
