@@ -5,6 +5,7 @@ import Category from "../models/Category.js";
 import Page from "../models/Page.js";
 import { textToImage } from "../utils/sdxl.js";
 import translate from "../utils/translate.js";
+import expressCache from "cache-express";
 const router = Router();
 router.get("/mostClicked", async (req, res) => {
   try {
@@ -22,19 +23,29 @@ router.get("/favourites", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-router.get("/:slug", async (req, res) => {
-  try {
-    const page = await Page.findOneAndUpdate(
-      { slug: req.params.slug },
-      { $inc: { clickCount: 1 } }, // clickCount'u 1 artır
-      { new: true } // Güncellenmiş dökümanı döndür
-    );
-    const catinfo = await Category.findById(page.categoryId);
-    res.json({ success: true, data: page, categoryInfo: catinfo });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+router.get(
+  "/:slug",
+  expressCache({
+    dependsOn: () => [],
+    timeOut: 60000 * 60 * 24, // Cache for 1 day
+    onTimeout: (key, value) => {
+      console.log(`Cache removed for key: ${key}`);
+    },
+  }),
+  async (req, res) => {
+    try {
+      const page = await Page.findOneAndUpdate(
+        { slug: req.params.slug },
+        { $inc: { clickCount: 1 } }, // clickCount'u 1 artır
+        { new: true } // Güncellenmiş dökümanı döndür
+      );
+      const catinfo = await Category.findById(page.categoryId);
+      res.json({ success: true, data: page, categoryInfo: catinfo });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
   }
-});
+);
 
 router.post("/", async (req, res) => {
   try {

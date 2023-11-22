@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
+import delayResponse from "./delayResponsePlugin.js";
 
 const pageSchema = new Schema(
   {
@@ -35,6 +36,7 @@ const pageSchema = new Schema(
   },
   { collection: "pages", timestamps: true }
 );
+pageSchema.plugin(delayResponse);
 
 const pageModel = mongoose.model("page", pageSchema);
 export default pageModel;

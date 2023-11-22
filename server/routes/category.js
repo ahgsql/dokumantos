@@ -6,16 +6,27 @@ import Page from "../models/Page.js";
 import { textToImage } from "../utils/sdxl.js";
 import translate from "../utils/translate.js";
 const router = Router();
+import expressCache from "cache-express";
+let postEdits = 1;
+router.get(
+  "/all",
+  expressCache({
+    dependsOn: () => [postEdits],
+    timeOut: 60000 * 60 * 24, // Cache for 1 day
+    onTimeout: (key, value) => {
+      console.log(`Cache removed for key: ${key}`);
+    },
+  }),
+  async (req, res) => {
+    try {
+      const allCategories = await CategoryModel.find();
 
-router.get("/all", async (req, res) => {
-  try {
-    const allCategories = await CategoryModel.find();
-
-    res.json({ success: true, data: allCategories });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+      res.json({ success: true, data: allCategories });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
   }
-});
+);
 router.get("/test", async (req, res) => {
   try {
     res.json({ success: true });
@@ -24,23 +35,34 @@ router.get("/test", async (req, res) => {
   }
 });
 
-router.get("/:slug", async (req, res) => {
-  // o kategoriye ait sayfaları dönderir.
-  try {
-    let category = await CategoryModel.findOne({ slug: req.params.slug });
+router.get(
+  "/:slug",
+  expressCache({
+    dependsOn: () => [],
+    timeOut: 60000 * 60 * 24, // Cache for 1 day
+    onTimeout: (key, value) => {
+      console.log(`Cache removed for key: ${key}`);
+    },
+  }),
+  async (req, res) => {
+    // o kategoriye ait sayfaları dönderir.
+    try {
+      let category = await CategoryModel.findOne({ slug: req.params.slug });
 
-    const pagesofCategories = await Page.find({ categoryId: category._id });
-    res.json({ success: true, pages: pagesofCategories, category });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+      const pagesofCategories = await Page.find({ categoryId: category._id });
+      res.json({ success: true, pages: pagesofCategories, category });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
   }
-});
+);
 
 router.post("/", async (req, res) => {
   // Adds new category
 
   try {
     let newCategory = await new CategoryModel({ ...req.body }).save();
+    postEdits++;
     res
       .status(200)
       .json({ message: "Category added.", success: true, data: newCategory });
