@@ -1,23 +1,32 @@
 {
-    "data":{
-        "name":"English",
-        "name_in_own_language":"English",
-        "code":"en"
-    },
-    "translations":{
-        "Categories":"Categories",
-        "Pages":"Pages",
-        "New Page":"New Page",
-        "Search":"Search",
-        "Content":"Content",
-        "Edit":"Edit",
-        "Select Language":"Select Language",
-           "Title":"Title",
-        "Category":"Category",
-        "Category Description":"Select a Category or Create New One",
-        "Documentation":"Documentation",
-        "Select Category":"Select Category",
-        "Save":"Save"
-    }
-    
+  "data": {
+    "name": "English",
+    "name_in_own_language": "English",
+    "code": "en"
+  },
+  "translations": {
+    "Categories": "Categories",
+    "Pages": "Pages",
+    "New Page": "New Page",
+    "Search": "Search",
+    "Content": "Content",
+    "Edit": "Edit",
+    "Select Language": "Select Language",
+    "Title": "Title",
+    "Category": "Category",
+    "Category Description": "Select a Category or Create New One",
+    "Documentation": "Documentation",
+    "Select Category": "Select Category",
+    "Save": "Save",
+    "Category Name": "Category Name",
+    "Category Slug": "Category Slug",
+    "Operations": "Operations",
+    "Category Add Error": "Title or Slug is Missing",
+    "Category Updated Toast": "Category Updated",
+    "Category Removed Toast": "Category Removed, Contents marked as Uncategorized",
+    "Documentation": "Documentation (MD Format)",
+    "Save": "Save",
+    "Cancel": "Cancel",
+    "Delete": "Delete"
+  }
 }

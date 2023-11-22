@@ -14,6 +14,15 @@ import { useLocation } from "react-router-dom";
 import { AddIcon } from "../components/icons/AddIcon";
 import { LangContext } from "../context/LangProvider";
 
+/**
+ * Navbar component that renders site navigation.
+ *
+ * Uses React context to get translation, language, and language setter functions.
+ * Renders nav links, search input, add page button, and language selector.
+ * Nav links highlighted based on current URL path.
+ * Language selector defaults to current language from context.
+ * Handles language change by calling context setter function.
+ */
 export default function Nav() {
   const { t, langs, setLang, lang } = React.useContext(LangContext);
 
@@ -68,6 +77,7 @@ export default function Nav() {
           label={t("Select Language")}
           className="max-w-xs"
           onChange={(event) => {
+            if (event.target.value == "") return;
             setLang(event.target.value);
           }}
           defaultSelectedKeys={[lang]}

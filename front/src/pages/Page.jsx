@@ -9,7 +9,7 @@ import {
 } from "@nextui-org/react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { Editable, useEditor } from "@wysimark/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,10 +17,11 @@ import "react-toastify/dist/ReactToastify.css";
 import getPage from "../hooks/getPage";
 import removePage from "../hooks/removePage";
 import { updatePage } from "../hooks/updatePage";
+import { LangContext } from "../context/LangProvider";
 export default function Category() {
   const [page, setPage] = useState(null);
   const [catInfo, setCatInfo] = useState(null);
-
+  const { t } = useContext(LangContext);
   let params = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const editor = useEditor({
@@ -63,7 +64,7 @@ export default function Category() {
       <div className="flex flex-row	gap-10 mt-10 space-between justify-center w-screen  ">
         <div className="flex flex-col  w-5/6 ">
           <Tabs aria-label="Options" color="primary">
-            <Tab key="icerik" title="İçerik" className="w-5/6">
+            <Tab key="icerik" title={t("Content")} className="w-5/6">
               <Card className="w-full">
                 {isLoading ? (
                   <div className=" w-full flex flex-col items-baseline gap-3 p-10">
@@ -109,7 +110,7 @@ export default function Category() {
                 )}
               </Card>
             </Tab>
-            <Tab key="duzenle" title="Düzenle" className="w-5/6">
+            <Tab key="duzenle" title={t("Edit")} className="w-5/6">
               <Card>
                 <CardBody>
                   <Editable
@@ -124,21 +125,21 @@ export default function Category() {
                   type="reset"
                   className="text-sm font-semibold leading-6 text-gray-900"
                 >
-                  Cancel
+                  {t("Cancel")}
                 </button>
                 <button
                   onClick={pageUpdate}
                   type="button"
                   className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Kaydet
+                  {t("Save")}
                 </button>
                 <button
                   onClick={pageRemove}
                   type="button"
                   className="rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Sil
+                  {t("Delete")}
                 </button>
               </div>
             </Tab>

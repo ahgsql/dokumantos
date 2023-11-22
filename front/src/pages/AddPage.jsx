@@ -37,7 +37,6 @@ export default function AddPage() {
     };
     let result = await addPage(data);
     navigate("/page/" + result.data.slug);
-    console.log(result);
   };
   const editor = useEditor({
     minHeight: 600,
@@ -86,7 +85,7 @@ export default function AddPage() {
                       setCategory(a);
                       setNewCategory("");
                     }}
-                    placeholder="Kategori Seç"
+                    placeholder={t("Select Category")}
                   >
                     {categories.map((category) => {
                       return (
@@ -107,7 +106,7 @@ export default function AddPage() {
                     key={"primary"}
                     type="text"
                     color={"primary"}
-                    placeholder="Kategori Adı"
+                    placeholder={t("Category Name")}
                     className="max-w-xs"
                     onChange={(e) => {
                       setNewCategory(e.target.value);
@@ -120,7 +119,7 @@ export default function AddPage() {
                     htmlFor="about"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Dökümantasyon (MD Formatı)
+                    {t("Documentation")}
                   </label>
                   <div className="mt-2 ">
                     <Editable
@@ -139,14 +138,14 @@ export default function AddPage() {
               type="reset"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
-              Cancel
+              {t("Cancel")}
             </button>
             <button
               type="button"
               onClick={savePage}
               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Kaydet
+              {t("Save")}
             </button>
           </div>
         </form>

@@ -9,15 +9,16 @@ import {
   Link,
   Spinner,
 } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import getCategoryPages from "../hooks/getCategoryPages";
+import { LangContext } from "../context/LangProvider";
 export default function Category() {
   const [pages, setPages] = useState([]);
   const [categ, setCateg] = useState(null);
-
+  const { t } = useContext(LangContext);
   let params = useParams();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -43,15 +44,15 @@ export default function Category() {
             ) : (
               <>
                 <CardHeader>
-                  <h1 className="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">
-                    {categ.categoryname} kategorisindeki yazılar
+                  <h1 className="mb-0 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white ">
+                    {categ.categoryname}
                   </h1>
                 </CardHeader>
                 <CardBody>
                   <div className="grid grid-cols-4 gap-4">
                     {pages.map((page, i) => {
                       return (
-                        <Card className="w-full">
+                        <Card key={i} className="w-full">
                           <Link href={"/page/" + page.slug}>
                             <CardHeader className="absolute z-10 top-0 flex-col !items-end	">
                               <div className="drop-shadow backdrop-blur	p-2 rounded-lg">

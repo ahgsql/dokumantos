@@ -11,6 +11,7 @@ import {
   Tab,
   Tabs,
 } from "@nextui-org/react";
+import { useContext } from "react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -20,11 +21,13 @@ import { AddIcon } from "../components/icons/AddIcon";
 import { CheckIcon } from "../components/icons/CheckIcon";
 import { DeleteIcon } from "../components/icons/DeleteIcon";
 import getCategories from "../hooks/getCategories";
-
+import { LangContext } from "../context/LangProvider";
 import { addCategory } from "../hooks/addCategory";
 import { removeCategory } from "../hooks/removeCategory";
 import { updateCategory } from "../hooks/updateCategory";
+
 export default function Categories() {
+  const { t } = useContext(LangContext);
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
   let nameRefs = useRef({});
@@ -62,13 +65,11 @@ export default function Categories() {
       await addCategory(name, slug);
       getAllCategories();
     } else {
-      toast.error("Kategori İsmi / Slug Giriniz");
+      toast.error(t("Category Add Error"));
       setIsLoading(false);
     }
   };
-  setTimeout(() => {
-    console.log(nameRefs.current);
-  }, 2500);
+
   const update = async (id) => {
     let data = {
       categoryname: nameRefs.current[id].value,
@@ -76,15 +77,13 @@ export default function Categories() {
     };
     let res = await updateCategory(id, data);
     if (res.success) {
-      toast.success("Kategori Güncellendi");
+      toast.success(t("Category Updated Toast"));
     }
   };
   const remove = async (id) => {
     let res = await removeCategory(id);
     if (res.success) {
-      toast.success(
-        "Kategori Silindi, İçindeki Sayfalar Kategorisiz Olarak İşaretlendi"
-      );
+      toast.success(t("Category Removed Toast"));
       navigate(0);
     }
   };
@@ -98,11 +97,11 @@ export default function Categories() {
   return (
     <div>
       <ToastContainer />
-      <div className="flex flex-row	gap-10 mt-10 space-between justify-center w-full  ">
+      <div className="flex flex-row	 mt-10 space-between justify-center w-full  ">
         <div className="flex flex-col max-w-2xl">
           <div></div>
           <Tabs aria-label="Options">
-            <Tab key="icerik" title="İçerik">
+            <Tab key="icerik" title={t("Content")}>
               <Card>
                 <CardBody>
                   {isLoading ? (
@@ -119,7 +118,6 @@ export default function Categories() {
                                 display: showImages ? "none" : "block",
                               }}
                               className="w-[200px] space-y-5 "
-                              radius="lg"
                             >
                               <Skeleton className="rounded-lg">
                                 <div className="h-44 rounded-lg bg-default-300"></div>
@@ -130,9 +128,12 @@ export default function Categories() {
                                 display: showImages ? "block" : "none",
                               }}
                             >
-                              <Link href={"/category/" + category.slug}>
+                              <Link
+                                href={"/category/" + category.slug}
+                                className="inline "
+                              >
                                 <CardHeader className="absolute z-10 bottom-1 flex-col !items-center 	 justify-items-center	">
-                                  <h4 className="text-gray-100 leading-5 font-medium text-large rounded-lg	 drop-shadow backdrop-blur	p-2  ">
+                                  <h4 className="text-sky-50 leading-5 font-medium text-large rounded-lg	 drop-shadow backdrop-blur	p-2 hover:bg-sky-950 transition-colors duration-1000 ease-in-out ">
                                     {category.title}
                                   </h4>
                                 </CardHeader>
@@ -154,22 +155,22 @@ export default function Categories() {
                 </CardBody>
               </Card>
             </Tab>
-            <Tab key="duzenle" title="Düzenle">
+            <Tab key="duzenle" title={t("Edit")}>
               <Card>
                 <CardBody>
                   <form className="mb-10 pb-4">
                     <div>
                       <div className="columns-3 border-b border-gray-900/10 mb-7">
                         <h2 className="text-base font-semibold leading-7 text-gray-900">
-                          Kategori Adı
+                          {t("Category Name")}
                         </h2>
 
                         <h2 className="text-base font-semibold leading-7 text-gray-900">
-                          Slug
+                          {t("Category Slug")}
                         </h2>
 
                         <h2 className="text-base font-semibold leading-7 text-gray-900">
-                          İşlemler
+                          {t("Operations")}
                         </h2>
                       </div>
                       <div className="columns-3  border-b pb-2">
@@ -177,7 +178,7 @@ export default function Categories() {
                           type="text"
                           color={"secondary"}
                           radius="none"
-                          placeholder="Yeni Kategori Adı"
+                          placeholder={t("Category Name")}
                           value={name}
                           className="max-w-xl"
                           onChange={(e) => {
@@ -189,7 +190,7 @@ export default function Categories() {
                           radius="none"
                           type="text"
                           color={"secondary"}
-                          placeholder="Yeni Kategori Slugu"
+                          placeholder={t("Category Slug")}
                           value={slug}
                           className="max-w-xl"
                           onChange={(e) => {

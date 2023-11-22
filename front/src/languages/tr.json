@@ -1,22 +1,32 @@
 {
-    "data":{
-        "name":"Turkish",
-        "name_in_own_language":"Türkçe",
-        "code":"tr"
-    },
-    "translations":{
-        "Categories":"Kategoriler",
-        "Pages":"Sayfalar",
-        "New Page":"Yeni sayfa",
-        "Search":"Ara",
-        "Content":"İçerik",
-        "Edit":"Düzenle",
-        "Select Language":"Dil Seçiniz",
-        "Title":"Başlık",
-        "Category":"Kategori",
-        "Category Description":"Varolan Kategorilerden Seçin Veya Ekleyin",
-        "Documentation":"Dokumentasyon",
-        "Select Category":"Kategori Seçimi",
-        "Save":"Kaydet"
-    }
+  "data": {
+    "name": "Turkish",
+    "name_in_own_language": "Türkçe",
+    "code": "tr"
+  },
+  "translations": {
+    "Categories": "Kategoriler",
+    "Pages": "Sayfalar",
+    "New Page": "Yeni sayfa",
+    "Search": "Ara",
+    "Content": "İçerik",
+    "Edit": "Düzenle",
+    "Select Language": "Dil Seçiniz",
+    "Title": "Başlık",
+    "Category": "Kategori",
+    "Category Description": "Varolan Kategorilerden Seçin Veya Ekleyin",
+    "Documentation": "Dokumentasyon",
+    "Select Category": "Kategori Seçimi",
+    "Save": "Kaydet",
+    "Category Name": "Kategori Adı",
+    "Category Slug": "Kategori Slug",
+    "Operations": "İşlemler",
+    "Category Add Error": "Başlık ya da Slug Eksik",
+    "Category Updated Toast": "Kategori Güncellendi",
+    "Category Removed Toast": "Kategori Silindi, İçindeki Sayfalar Kategorisiz Olarak İşaretlendi",
+    "Documentation": "Dökümantasyon (MD Formatı)",
+    "Save": "Kaydet",
+    "Cancel": "İptal Et",
+    "Delete": "Sil"
+  }
 }

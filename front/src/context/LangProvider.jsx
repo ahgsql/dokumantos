@@ -1,6 +1,11 @@
 import React, { createContext, useEffect, useState } from "react";
 import langs from "../languages/init";
 let LangContext;
+/**
+ * LangProvider component provides language context
+ * and handles setting/getting language in localStorage.
+ * Exports provider component to make lang state available to children.
+ */
 export default function LangProvider({ children }) {
   let check = localStorage.getItem("lang");
   let initialLang;

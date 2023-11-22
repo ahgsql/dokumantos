@@ -9,7 +9,8 @@ export default async function getCategories() {
       }
     );
     if (data.data.success) {
-      return data.data.data ;
+      console.log(data.data.data);
+      return data.data.data;
     }
   } catch (error) {
     return false;
