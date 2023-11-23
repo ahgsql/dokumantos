@@ -84,7 +84,9 @@ export default function Categories() {
     let res = await removeCategory(id);
     if (res.success) {
       toast.success(t("Category Removed Toast"));
-      navigate(0);
+      setTimeout(() => {
+        navigate(0);
+      }, 2055);
     }
   };
 

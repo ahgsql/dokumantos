@@ -24,9 +24,10 @@
     "Category Add Error": "Title or Slug is Missing",
     "Category Updated Toast": "Category Updated",
     "Category Removed Toast": "Category Removed, Contents marked as Uncategorized",
-    "Documentation": "Documentation (MD Format)",
-    "Save": "Save",
+    "Documentation Title": "Documentation (MD Format)",
     "Cancel": "Cancel",
-    "Delete": "Delete"
+    "Delete": "Delete",
+    "Favourites":"Favourites",
+    "Most Clicked":"Most Visited"
   }
 }

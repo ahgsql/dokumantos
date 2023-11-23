@@ -12,7 +12,8 @@ router.get(
   "/all",
   expressCache({
     dependsOn: () => [postEdits],
-    timeOut: 60000 * 60 * 24, // Cache for 1 day
+    timeOut: 1000,
+    // timeOut: 60000 * 60 * 24, // Cache for 1 day
     onTimeout: (key, value) => {
       console.log(`Cache removed for key: ${key}`);
     },
@@ -39,7 +40,7 @@ router.get(
   "/:slug",
   expressCache({
     dependsOn: () => [],
-    timeOut: 60000 * 60 * 24, // Cache for 1 day
+    timeOut: 1000, //60000 * 60 * 24, // Cache for 1 day
     onTimeout: (key, value) => {
       console.log(`Cache removed for key: ${key}`);
     },
@@ -48,7 +49,6 @@ router.get(
     // o kategoriye ait sayfaları dönderir.
     try {
       let category = await CategoryModel.findOne({ slug: req.params.slug });
-
       const pagesofCategories = await Page.find({ categoryId: category._id });
       res.json({ success: true, pages: pagesofCategories, category });
     } catch (error) {
@@ -117,6 +117,11 @@ router.delete("/:id", async (req, res) => {
     if (!category) {
       return res.status(404).json({ error: "Kategori bulunamadı" });
     }
+    //Move Posts to Uncategorized 655faad328003b763764ad58
+    await Page.updateMany(
+      { categoryId: category._id },
+      { categoryId: "655faad328003b763764ad58" }
+    );
 
     await CategoryModel.findByIdAndDelete(categoryId);
     res

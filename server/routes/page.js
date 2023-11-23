@@ -15,6 +15,14 @@ router.get("/mostClicked", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+router.get("/recent", async (req, res) => {
+  try {
+    const pages = await Page.find().sort({ createdAt: -1 }).limit(20);
+    res.json({ success: true, data: pages });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 router.get("/favourites", async (req, res) => {
   try {
     const favourites = await Page.find({ favourited: true });
@@ -27,7 +35,7 @@ router.get(
   "/:slug",
   expressCache({
     dependsOn: () => [],
-    timeOut: 60000 * 60 * 24, // Cache for 1 day
+    timeOut: 1000, //60000 * 60 * 24, // Cache for 1 day
     onTimeout: (key, value) => {
       console.log(`Cache removed for key: ${key}`);
     },
@@ -77,6 +85,7 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: true, message: "Internal Server Error" });
   }
 });
+
 router.delete("/:id", async (req, res) => {
   const pageId = req.params.id;
 
@@ -91,7 +100,20 @@ router.delete("/:id", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
+router.post("/favourite/:id", async (req, res) => {
+  const pageId = req.params.id;
+  try {
+    let page = await Page.findById(pageId);
+    if (!page) {
+      return res.status(404).json({ error: "Page not found" });
+    }
+    page.favourited = req.body.favourited;
+    await page.save();
+    res.status(200).json({ success: true, data: page });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 router.put("/:id", async (req, res) => {
   const pageId = req.params.id;
   const { title, content, slug } = req.body;

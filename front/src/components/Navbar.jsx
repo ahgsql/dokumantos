@@ -52,6 +52,22 @@ export default function Nav() {
           >
             {t("Pages")}
           </Link>
+        </NavbarItem>{" "}
+        <NavbarItem isActive={currentpath == "favourites"}>
+          <Link
+            href="/favourites"
+            color={currentpath == "favourites" ? "primary" : "foreground"}
+          >
+            {t("Favourites")}
+          </Link>
+        </NavbarItem>{" "}
+        <NavbarItem isActive={currentpath == "mostclicked"}>
+          <Link
+            href="/mostclicked"
+            color={currentpath == "mostclicked" ? "primary" : "foreground"}
+          >
+            {t("Most Clicked")}
+          </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent>

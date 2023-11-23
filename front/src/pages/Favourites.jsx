@@ -11,30 +11,25 @@ import {
   Tooltip,
 } from "@nextui-org/react";
 import { useContext, useEffect, useState } from "react";
-
-//TODO move page card individual component
-import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import getCategoryPages from "../hooks/getCategoryPages";
-import { changePageFavourited } from "../hooks/changePageFavourited";
+import getFavourites from "../hooks/getFavourites";
 import { LangContext } from "../context/LangProvider";
 import { HeartFilled } from "../components/icons/HeartFilled";
 import { HeartEmpty } from "../components/icons/HeartEmpty";
 import { Click } from "../components/icons/Click";
-export default function Category() {
-  const navigate = useNavigate();
+import { changePageFavourited } from "../hooks/changePageFavourited";
+import { useNavigate } from "react-router-dom";
+export default function Favourites() {
   const [pages, setPages] = useState([]);
-  const [categ, setCateg] = useState(null);
+  const navigate = useNavigate();
   const { t } = useContext(LangContext);
-  let params = useParams();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     (async () => {
-      let pages = await getCategoryPages(params.slug);
-      setPages(pages.pages);
-      setCateg(pages.category);
+      let pages = await getFavourites();
+      setPages(pages.data);
       setIsLoading(false);
     })();
   }, []);
@@ -43,11 +38,8 @@ export default function Category() {
   };
   const handlePageFavourite = async (id, favourited) => {
     await changePageFavourited(id, favourited);
-    let newPages = pages.map((page) => {
-      if (page._id == id) {
-        page.favourited = !page.favourited;
-      }
-      return page;
+    let newPages = pages.filter((page) => {
+      return page._id !== id;
     });
     setPages(newPages);
   };
@@ -65,7 +57,7 @@ export default function Category() {
               <>
                 <CardHeader>
                   <h1 className="mb-0 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white ">
-                    {categ.categoryname}
+                    {t("Favourites")}
                   </h1>
                 </CardHeader>
                 <CardBody>

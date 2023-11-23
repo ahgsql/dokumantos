@@ -11,30 +11,26 @@ import {
   Tooltip,
 } from "@nextui-org/react";
 import { useContext, useEffect, useState } from "react";
-
-//TODO move page card individual component
-import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import getCategoryPages from "../hooks/getCategoryPages";
+import getMostVisited from "../hooks/getMostVisited";
 import { changePageFavourited } from "../hooks/changePageFavourited";
 import { LangContext } from "../context/LangProvider";
 import { HeartFilled } from "../components/icons/HeartFilled";
 import { HeartEmpty } from "../components/icons/HeartEmpty";
 import { Click } from "../components/icons/Click";
-export default function Category() {
-  const navigate = useNavigate();
+import { useNavigate } from "react-router-dom";
+export default function MostVisited() {
   const [pages, setPages] = useState([]);
-  const [categ, setCateg] = useState(null);
   const { t } = useContext(LangContext);
-  let params = useParams();
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     (async () => {
-      let pages = await getCategoryPages(params.slug);
-      setPages(pages.pages);
-      setCateg(pages.category);
+      let pages = await getMostVisited();
+      setPages(pages.data);
       setIsLoading(false);
     })();
   }, []);
@@ -65,7 +61,7 @@ export default function Category() {
               <>
                 <CardHeader>
                   <h1 className="mb-0 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white ">
-                    {categ.categoryname}
+                    {t("Most Clicked")}
                   </h1>
                 </CardHeader>
                 <CardBody>

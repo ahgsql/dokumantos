@@ -36,7 +36,7 @@ const pageSchema = new Schema(
   },
   { collection: "pages", timestamps: true }
 );
-pageSchema.plugin(delayResponse);
+//pageSchema.plugin(delayResponse);
 
 const pageModel = mongoose.model("page", pageSchema);
 export default pageModel;

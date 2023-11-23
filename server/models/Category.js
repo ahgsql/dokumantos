@@ -23,6 +23,6 @@ const categorySchema = new Schema(
   },
   { collection: "categories" }
 );
-categorySchema.plugin(delayResponse);
+//categorySchema.plugin(delayResponse);
 const categoryModel = mongoose.model("category", categorySchema);
 export default categoryModel;

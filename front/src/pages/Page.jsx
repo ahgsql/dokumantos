@@ -36,12 +36,16 @@ export default function Category() {
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-
       let page2 = await getPage(params.slug);
+
       setPage(page2.data);
-      setCatInfo(page2.categoryInfo);
-      setIsLoading(false);
-      setMarkdown(page2.data.content);
+      if (page2.categoryInfo == null) {
+        navigate("/categories");
+      } else {
+        setCatInfo(page2.categoryInfo);
+        setIsLoading(false);
+        setMarkdown(page2.data.content);
+      }
     })();
   }, [stateTracker]);
 
