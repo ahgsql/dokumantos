@@ -45,14 +45,6 @@ export default function Nav() {
             {t("Categories")}
           </Link>
         </NavbarItem>
-        <NavbarItem isActive={currentpath == "pages"}>
-          <Link
-            href="/pages"
-            color={currentpath == "pages" ? "primary" : "foreground"}
-          >
-            {t("Pages")}
-          </Link>
-        </NavbarItem>{" "}
         <NavbarItem isActive={currentpath == "favourites"}>
           <Link
             href="/favourites"
