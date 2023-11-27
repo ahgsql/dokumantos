@@ -26,6 +26,7 @@ router.get("/recent", async (req, res) => {
 router.get("/favourites", async (req, res) => {
   try {
     const favourites = await Page.find({ favourited: true });
+
     res.json({ success: true, data: favourites });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -35,7 +36,7 @@ router.get(
   "/:slug",
   expressCache({
     dependsOn: () => [],
-    timeOut: 1000, //60000 * 60 * 24, // Cache for 1 day
+    timeOut: 10000, //60000 * 60 * 24, // Cache for 1 day
     onTimeout: (key, value) => {
       console.log(`Cache removed for key: ${key}`);
     },

@@ -11,20 +11,15 @@ import {
   Tooltip,
 } from "@nextui-org/react";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import getFavourites from "../hooks/getFavourites";
 import { LangContext } from "../context/LangProvider";
-import { HeartFilled } from "../components/icons/HeartFilled";
-import { HeartEmpty } from "../components/icons/HeartEmpty";
-import { Click } from "../components/icons/Click";
-import { changePageFavourited } from "../hooks/changePageFavourited";
-import { useNavigate } from "react-router-dom";
+
 import PageCard from "../components/PageCard";
 export default function Favourites() {
   const [pages, setPages] = useState([]);
-  const navigate = useNavigate();
   const { t } = useContext(LangContext);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -34,11 +29,8 @@ export default function Favourites() {
       setIsLoading(false);
     })();
   }, []);
-  const handlePageClick = (slug) => {
-    navigate("/page/" + slug);
-  };
+
   const handlePageFavourite = async (id, favourited) => {
-    await changePageFavourited(id, favourited);
     let newPages = pages.filter((page) => {
       return page._id !== id;
     });

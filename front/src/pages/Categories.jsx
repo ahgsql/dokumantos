@@ -101,7 +101,6 @@ export default function Categories() {
       <ToastContainer />
       <div className="flex flex-row	 mt-10 space-between justify-center w-full  ">
         <div className="flex flex-col max-w-2xl">
-          <div></div>
           <Tabs aria-label="Options">
             <Tab key="icerik" title={t("Content")}>
               <Card>

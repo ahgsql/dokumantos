@@ -27,7 +27,9 @@
     "Documentation Title": "Documentation (MD Format)",
     "Cancel": "Cancel",
     "Delete": "Delete",
-    "Favourites":"Favourites",
-    "Most Clicked":"Most Visited"
+    "Favourites": "Favourites",
+    "Most Clicked": "Most Visited",
+    "Latest": "Latest",
+    "Suggested": "Suggested"
   }
 }

@@ -24,10 +24,12 @@
     "Category Add Error": "Başlık ya da Slug Eksik",
     "Category Updated Toast": "Kategori Güncellendi",
     "Category Removed Toast": "Kategori Silindi, İçindeki Sayfalar Kategorisiz Olarak İşaretlendi",
-    "Documentation Title" : "Dökümantasyon (MD Formatı)",
+    "Documentation Title": "Dökümantasyon (MD Formatı)",
     "Cancel": "İptal Et",
     "Delete": "Sil",
-    "Favourites":"Favoriler",
-    "Most Clicked":"Sık Kullanılan"
+    "Favourites": "Favoriler",
+    "Most Clicked": "Sık Kullanılan",
+    "Latest": "Son Eklenen",
+    "Suggested": "Önerilen"
   }
 }

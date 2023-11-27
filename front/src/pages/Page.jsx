@@ -33,6 +33,7 @@ export default function Category() {
   const [markdown, setMarkdown] = useState("");
   const [stateTracker, setStateTracker] = useState(0);
   const navigate = useNavigate();
+
   useEffect(() => {
     (async () => {
       setIsLoading(true);
